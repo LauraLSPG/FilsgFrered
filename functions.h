@@ -1,17 +1,34 @@
+#include <stdio.h>
+#include <string.h>
+#include <stdlib.h>
+#include <math.h>
+
+/*
+	COMPILATION
+	gcc -ansi -Wall Lexique.c -o Lexique
+	./Lexique
+*/
+
 #ifndef FG_FrD
 #define FG_FrD
 
-typedef strut noeud {
+typedef struct noeud {
     unsigned char lettre;
-    strut noeud *filsg, *frered;
+    struct noeud *filsg, *frered;
 } Noeud, *Arbre;
 
-#endif FG_FrD
+Arbre alloueNoeud(unsigned char lettre);
 
-void afficheLexique (Arbre a);
+void ajouteBranche(Arbre *a, char *mot);
 
-void sauvegardeMots (Arbre a, FILE *out);
+void ajouteMot(Arbre *a, char *mot);
 
-int recherche (Arbre a, char *mot);
+int recherche(Arbre a, char *mot);
 
-void sauvegardeArbre (Arbre a ,FILE *out);
+void afficheLexique(Arbre a, char *buffer, int idx);
+
+void sauvegardeMots(Arbre a, FILE *out);
+
+void sauvegardeArbre(Arbre a ,FILE *out);
+
+#endif
