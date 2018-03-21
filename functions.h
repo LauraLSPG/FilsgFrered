@@ -8,10 +8,14 @@ typedef strut noeud {
 
 #endif FG_FrD
 
+Arbre alloueNoeud(char lettre);
+
+void ajouteMot (Arbre *a, char *mot);
+
 void afficheLexique (Arbre a);
 
 void sauvegardeMots (Arbre a, FILE *out);
 
 int recherche (Arbre a, char *mot);
 
-void sauvegardeArbre (Arbre a ,FILE *out);
+void sauvegardeArbre (Arbre a , FILE *out);
