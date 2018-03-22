@@ -21,7 +21,7 @@ Arbre alloueNoeud(unsigned char lettre);
 
 void ajouteBranche(Arbre *a, char *mot);
 
-// Fonctions d'ajout d'un mot et d'ajout de mots depuis un fichier :
+/* Fonctions d'ajout d'un mot et d'ajout de mots depuis un fichier */
 
 void ajouteMotsDepuisFichier (Arbre *a, char *nomFichier);
 
@@ -29,25 +29,25 @@ void ajouteMot(Arbre *a, char *mot);
 
 void creeArbreDepuisFichier (Arbre *a, char *nomFichier);
 
-void _creeArbre (Arbre *a, FILE *in);
+void creeArbre (Arbre *a, FILE *in);
 
-// Fonction de Recherche d'un mot dans un lexique :
+/* Fonction de Recherche d'un mot dans un lexique */
 
 int recherche(Arbre a, char *mot);
 
-// Fonctions d'affichage du Lexique depuis un fichier :
-
-void afficheLexique(Arbre a, char *buffer, int idx);
+/* Fonctions d'affichage du Lexique depuis un fichier */
 
 void afficheLexiqueDepuisFichier(Arbre *a, char *nomFichier);
 
-// Fonctions de sauvegarde du Lexique dans un fichier :
+void afficheLexique(Arbre a, char *buffer, int idx);
+
+/* Fonctions de sauvegarde du Lexique dans un fichier */
 
 void sauvegardeLexiqueDansFichier(Arbre a, char *nomFichier);
 
 void sauvegardeLexique(Arbre a, FILE *out, char *buffer, int idx);
 
-// Fonctions de sauvegarde de l'Arbre dans un fichier :
+/* Fonctions de sauvegarde de l'Arbre dans un fichier */
 
 void sauvegardeArbreDansFichier(Arbre a, char *nomFichier);
 

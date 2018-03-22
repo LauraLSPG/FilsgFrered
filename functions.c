@@ -45,6 +45,7 @@ void ajouteMot(Arbre *a, char *mot) {
 
 void ajouteMotsDepuisFichier (Arbre *a, char *nomFichier) {
 
+	char caractereActuel;
     FILE *in = fopen(nomFichier, "r");
     char bufferAjout [TAILLE_MAX];
     int i;
@@ -73,8 +74,9 @@ void creeArbreDepuisFichier (Arbre *a, char *nomFichier) {
     fclose(in);
 }
 
-void _creeArbre (Arbre *a, FILE *in) {
+void creeArbre (Arbre *a, FILE *in) {
 
+	char caractereActuel;
     if (in != NULL) {
 
         while ((caractereActuel = fgetc(in)) != EOF) {
@@ -83,7 +85,7 @@ void _creeArbre (Arbre *a, FILE *in) {
 
             case ' ' :
                 (*a)->lettre = '\0';
-                _creeArbre(&((*a)->frered), in);
+                creeArbre(&((*a)->frered), in);
                 break;
 
             case '\n' :
@@ -92,8 +94,8 @@ void _creeArbre (Arbre *a, FILE *in) {
 
             default :
                 (*a)->lettre = caractereActuel;
-                _creeArbre(&((*a)->filsg), in);
-                _creeArbre(&((*a)->frered), in);
+                creeArbre(&((*a)->filsg), in);
+                creeArbre(&((*a)->frered), in);
                 break;
             }
         }
@@ -115,7 +117,7 @@ int recherche(Arbre a, char *mot) {
 void afficheLexiqueDepuisFichier(Arbre *a, char *nomFichier) {
 
     char buffer[TAILLE_MAX];
-    ajouteMotsFichier(a, nomFichier);
+    ajouteMotsDepuisFichier(a, nomFichier);
     afficheLexique(*a, buffer, 0);
     makedot(*a, "Lexique.dot");
     system("dot -Tpdf Lexique.dot -o Lexique.pdf");
@@ -143,7 +145,7 @@ void sauvegardeLexiqueDansFichier(Arbre a, char *nomFichier) {
 
 }
 
-void _sauvegardeLexique(Arbre a, FILE *out, char *buffer, int idx) {
+void sauvegardeLexique(Arbre a, FILE *out, char *buffer, int idx) {
 
     if (out != NULL && a != NULL) {
 
@@ -168,7 +170,7 @@ void sauvegardeArbreDansFichier(Arbre a, char *nomFichier) {
     sauvegardeArbre(a, out);
 }
 
-void _sauvegardeArbre(Arbre a, FILE *out) {
+void sauvegardeArbre(Arbre a, FILE *out) {
 
     if (a != NULL) {
         if (a != '\0')  {
@@ -177,9 +179,9 @@ void _sauvegardeArbre(Arbre a, FILE *out) {
             sauvegardeArbre(a->frered, out);
         }
         else {
-            fprintf(out, ' ');
+            fprintf(out, " ");
             sauvegardeArbre(a->frered, out);
         }
     }
-    else fprintf(out, '\n');
+    else fprintf(out, "\n");
 }

@@ -5,7 +5,7 @@ void makedot (Arbre a, char nomFichier[]) {
     FILE *out;
     out=fopen(nomFichier,"w"); /* suppose OK*/
     ecrireDebut(out);
-    ecrireTarbre(out, a);
+    ecrireArbre(out, a);
     ecrireFin(out);
     fclose(out);
 
@@ -20,7 +20,7 @@ void ecrireFin(FILE* stream) {
     fprintf(stream, "\n}\n");
 }
 
-void ecrireTarbre(FILE* stream, Arbre a){
+void ecrireArbre(FILE* stream, Arbre a){
 
     if (a != NULL){
 
@@ -29,11 +29,11 @@ void ecrireTarbre(FILE* stream, Arbre a){
 
         if (a->frered){
             fprintf(stream, "n%p:droit:c -> n%p[color=blue];\n", a, a->frered);
-            ecrireTarbre(stream, a->frered);
+            ecrireArbre(stream, a->frered);
         }
         if (a->filsg){
             fprintf(stream, "n%p:s -> n%p [color=blue];\n", a, a->filsg);
-            ecrireTarbre(stream, a->filsg);
+            ecrireArbre(stream, a->filsg);
         }
     }
 }
