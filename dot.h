@@ -7,4 +7,3 @@ void ecrireDebut(FILE* stream);
 void ecrireFin(FILE* stream);
 
 void ecrireArbre(FILE* stream, Arbre a);
-
