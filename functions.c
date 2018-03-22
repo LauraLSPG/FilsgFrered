@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "dot.h"
 
 Arbre alloueNoeud(unsigned char lettre) {
 
@@ -116,6 +117,8 @@ void afficheLexiqueDepuisFichier(Arbre *a, char *nomFichier) {
     char buffer[TAILLE_MAX];
     ajouteMotsFichier(a, nomFichier);
     afficheLexique(*a, buffer, 0);
+    makedot(*a, "Lexique.dot");
+
 }
 
 void afficheLexique(Arbre a, char *buffer, int idx) {
