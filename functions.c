@@ -118,6 +118,7 @@ void afficheLexiqueDepuisFichier(Arbre *a, char *nomFichier) {
     ajouteMotsFichier(a, nomFichier);
     afficheLexique(*a, buffer, 0);
     makedot(*a, "Lexique.dot");
+    system("dot -Tpdf arbre.dot -o arbre.pdf");
 
 }
 
