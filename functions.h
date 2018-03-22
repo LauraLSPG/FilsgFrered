@@ -21,26 +21,14 @@ Arbre alloueNoeud(unsigned char lettre);
 
 void ajouteBranche(Arbre *a, char *mot);
 
-void ajouteMot(Arbre *a, char *mot);
+void ajouteMot(Arbre *a, char *mot);;
 
 int recherche(Arbre a, char *mot);
 
-<<<<<<< HEAD
 void afficheLexique(Arbre a, char *buffer, int idx);
-=======
-Arbre alloueNoeud(char lettre);
 
-void ajouteMot (Arbre *a, char *mot);
+void sauvegardeLexique(Arbre a, FILE *out);
 
-void afficheLexique (Arbre a);
->>>>>>> 2a4a91dc7af4dd36ecd2221bc12c1400d2f5afd2
+void sauvegardeArbre(Arbre a, FILE *out);
 
-void sauvegardeMots(Arbre a, FILE *out);
-
-void sauvegardeArbre(Arbre a ,FILE *out);
-
-<<<<<<< HEAD
 #endif
-=======
-void sauvegardeArbre (Arbre a , FILE *out);
->>>>>>> 2a4a91dc7af4dd36ecd2221bc12c1400d2f5afd2
