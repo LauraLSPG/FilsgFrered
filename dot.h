@@ -1,6 +1,6 @@
 #include "functions.h"
 
-void makedot (Arbre a, char nomFichier[]);
+void makedot(Arbre a, char nomFichier[]);
 
 void ecrireDebut(FILE* stream);
 

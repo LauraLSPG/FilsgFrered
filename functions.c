@@ -3,9 +3,9 @@
 
 Arbre alloueNoeud(unsigned char lettre) {
 
-	Arbre a = (Arbre)malloc(sizeof(Noeud));
+	Arbre a =(Arbre)malloc(sizeof(Noeud));
 
-	if (a != NULL) {
+	if(a != NULL) {
 		a->lettre = lettre;
 		a->filsg = NULL;
 		a->frered = NULL;
@@ -43,48 +43,47 @@ void ajouteMot(Arbre *a, char *mot) {
 	}
 }
 
-void ajouteMotsDepuisFichier (Arbre *a, char *nomFichier) {
+void ajouteMotsDepuisFichier(Arbre *a, char *nomFichier) {
 
-	char caractereActuel;
-    FILE *in = fopen(nomFichier, "r");
-    char bufferAjout [TAILLE_MAX];
     int i;
+	char caractereActuel;
+    char bufferAjout[TAILLE_MAX];
+    FILE *in = fopen(nomFichier, "r");
 
-    if (in != NULL) {
+    if(in != NULL) {
 
-        caractereActuel = fgetc(in);
-
-        while (caractereActuel != EOF) {
+        while((caractereActuel = fgetc(in)) != EOF) {
             i = 0;
-            do {
+            while(caractereActuel != 32 && caractereActuel != EOF) {
                 bufferAjout[i] = caractereActuel;
+                i++;
+                caractereActuel = fgetc(in);
             }
-            while (caractereActuel != '\0');
+            bufferAjout[i] = '\0';
             ajouteMot(a, bufferAjout);
-            caractereActuel = fgetc(in);
         }
     }
     fclose(in);
 }
 
-void creeArbreDepuisFichier (Arbre *a, char *nomFichier) {
+void creeArbreDepuisFichier(Arbre *a, char *nomFichier) {
 
     FILE *in = fopen(nomFichier, "r");
 
     fclose(in);
 }
 
-void creeArbre (Arbre *a, FILE *in) {
+void creeArbre(Arbre *a, FILE *in) {
 
 	char caractereActuel;
-    if (in != NULL) {
+    if(in != NULL) {
 
-        while ((caractereActuel = fgetc(in)) != EOF) {
+        while((caractereActuel = fgetc(in)) != EOF) {
 
-            switch (caractereActuel) {
+            switch(caractereActuel) {
 
-            case ' ' :
-                (*a)->lettre = '\0';
+            case 32 :
+               (*a)->lettre = '\0';
                 creeArbre(&((*a)->frered), in);
                 break;
 
@@ -93,7 +92,7 @@ void creeArbre (Arbre *a, FILE *in) {
                 break;
 
             default :
-                (*a)->lettre = caractereActuel;
+               (*a)->lettre = caractereActuel;
                 creeArbre(&((*a)->filsg), in);
                 creeArbre(&((*a)->frered), in);
                 break;
@@ -101,7 +100,6 @@ void creeArbre (Arbre *a, FILE *in) {
         }
     }
 }
-
 
 int recherche(Arbre a, char *mot) {
 
@@ -126,7 +124,7 @@ void afficheLexiqueDepuisFichier(Arbre *a, char *nomFichier) {
 
 void afficheLexique(Arbre a, char *buffer, int idx) {
 
-    if (a != NULL) {
+    if(a != NULL) {
         buffer[idx] = a->lettre;
         if(a->lettre == '\0') printf("%s\n", buffer);
         else {
@@ -147,7 +145,7 @@ void sauvegardeLexiqueDansFichier(Arbre a, char *nomFichier) {
 
 void sauvegardeLexique(Arbre a, FILE *out, char *buffer, int idx) {
 
-    if (out != NULL && a != NULL) {
+    if(out != NULL && a != NULL) {
 
         buffer[idx] = a->lettre;
 
@@ -172,8 +170,8 @@ void sauvegardeArbreDansFichier(Arbre a, char *nomFichier) {
 
 void sauvegardeArbre(Arbre a, FILE *out) {
 
-    if (a != NULL) {
-        if (a != '\0')  {
+    if(a != NULL) {
+        if(a != '\0')  {
             fprintf(out, "%c", a->lettre);
             sauvegardeArbre(a->filsg, out);
             sauvegardeArbre(a->frered, out);

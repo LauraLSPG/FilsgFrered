@@ -12,11 +12,13 @@ void makedot (Arbre a, char nomFichier[]) {
 }
 
 void ecrireDebut(FILE* stream) {
+
     fprintf(stream, "digraph arbre {\n  node [shape=record, height=.1];\n");
     fprintf(stream, "edge [tailclip=false, arrowtail=dot, dir=both];\n\n");
 }
 
 void ecrireFin(FILE* stream) {
+    
     fprintf(stream, "\n}\n");
 }
 
