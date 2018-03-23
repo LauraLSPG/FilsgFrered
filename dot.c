@@ -30,11 +30,11 @@ void ecrireArbre(FILE* stream, Arbre a){
         else fprintf(stream, "n%p [label=\"<gauche> | %c | <droit>\"];\n", a, a->lettre);
 
         if (a->frered){
-            fprintf(stream, "n%p:droit:c -> n%p[color=blue];\n", a, a->frered);
+            fprintf(stream, "n%p:droit:c -> n%p[color=orange];\n", a, a->frered);
             ecrireArbre(stream, a->frered);
         }
         if (a->filsg){
-            fprintf(stream, "n%p:s -> n%p [color=blue];\n", a, a->filsg);
+            fprintf(stream, "n%p:s -> n%p [color=pink];\n", a, a->filsg);
             ecrireArbre(stream, a->filsg);
         }
     }

@@ -55,9 +55,11 @@ void ajouteMotsDepuisFichier(Arbre *a, char *nomFichier) {
         while((caractereActuel = fgetc(in)) != EOF) {
             i = 0;
             while(caractereActuel != 32 && caractereActuel != EOF) {
-                bufferAjout[i] = caractereActuel;
-                i++;
-                caractereActuel = fgetc(in);
+            	if(caractereActuel != 10) {
+	                bufferAjout[i] = caractereActuel;
+	                i++;
+            	}
+	                caractereActuel = fgetc(in);
             }
             bufferAjout[i] = '\0';
             ajouteMot(a, bufferAjout);
@@ -69,7 +71,7 @@ void ajouteMotsDepuisFichier(Arbre *a, char *nomFichier) {
 void creeArbreDepuisFichier(Arbre *a, char *nomFichier) {
 
     FILE *in = fopen(nomFichier, "r");
-
+    creeArbre(a, in);
     fclose(in);
 }
 
@@ -101,9 +103,15 @@ void creeArbre(Arbre *a, FILE *in) {
     }
 }
 
+/*
+	Fonction de recherche qui retourne :
+		-1	si l'arbre est vide,
+		0	si le mot est absent de l'arbre
+		1	si le mot est présent dans l'arbre
+*/
 int recherche(Arbre a, char *mot) {
 
-	if(a == NULL) return 0;
+	if(a == NULL) return -1;
 	if(*mot < a->lettre) return 0;
 	if(*mot == a->lettre) {
 		if(*mot == '\0') return 1;
@@ -114,8 +122,8 @@ int recherche(Arbre a, char *mot) {
 
 void afficheLexiqueDepuisFichier(Arbre *a, char *nomFichier) {
 
+    printf("%s\n", nomFichier);
     char buffer[TAILLE_MAX];
-    ajouteMotsDepuisFichier(a, nomFichier);
     afficheLexique(*a, buffer, 0);
     makedot(*a, "Lexique.dot");
     system("dot -Tpdf Lexique.dot -o Lexique.pdf");
@@ -182,4 +190,24 @@ void sauvegardeArbre(Arbre a, FILE *out) {
         }
     }
     else fprintf(out, "\n");
+}
+
+void supprimeSuffixe(char *nomFichier, char *nomFichierSansSuffixe) {
+
+	int idx = 0;
+	strcpy(nomFichierSansSuffixe, nomFichier);
+
+	while(nomFichierSansSuffixe[idx] != '.') {
+		idx++;
+	}
+	nomFichierSansSuffixe[idx] = '\0';
+}
+
+char * ajouteSuffixe(char *nomFichier, char *suffixe) {
+
+	supprimeSuffixe(nomFichier, nomFichier)
+	strcat(nomFichier, suffixe);
+	printf("%s\n", nomFichier);
+	
+	return nomFichier;
 }
