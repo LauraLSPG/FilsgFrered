@@ -122,7 +122,6 @@ int recherche(Arbre a, char *mot) {
 
 void afficheLexiqueDepuisFichier(Arbre *a, char *nomFichier) {
 
-    printf("%s\n", nomFichier);
     char buffer[TAILLE_MAX];
     afficheLexique(*a, buffer, 0);
     makedot(*a, "Lexique.dot");
@@ -167,7 +166,6 @@ void sauvegardeLexique(Arbre a, FILE *out, char *buffer, int idx) {
             sauvegardeLexique(a->frered, out, buffer, idx);
         }
     }
-
 }
 
 void sauvegardeArbreDansFichier(Arbre a, char *nomFichier) {
@@ -192,22 +190,18 @@ void sauvegardeArbre(Arbre a, FILE *out) {
     else fprintf(out, "\n");
 }
 
-void supprimeSuffixe(char *nomFichier, char *nomFichierSansSuffixe) {
+void supprimeSuffixe(char *nomFichier) {
 
 	int idx = 0;
-	strcpy(nomFichierSansSuffixe, nomFichier);
 
-	while(nomFichierSansSuffixe[idx] != '.') {
+	while(nomFichier[idx] != '.' && nomFichier[idx] != '\0') {
 		idx++;
 	}
-	nomFichierSansSuffixe[idx] = '\0';
+	nomFichier[idx] = '\0';
 }
 
-char * ajouteSuffixe(char *nomFichier, char *suffixe) {
+void ajouteSuffixe(char *nomFichier, char *suffixe) {
 
-	supprimeSuffixe(nomFichier, nomFichier)
+	supprimeSuffixe(nomFichier);
 	strcat(nomFichier, suffixe);
-	printf("%s\n", nomFichier);
-	
-	return nomFichier;
 }

@@ -54,6 +54,8 @@ void sauvegardeArbreDansFichier(Arbre a, char *nomFichier);
 
 void sauvegardeArbre(Arbre a, FILE *out);
 
-void supprimeSuffixe(char *nomFichier, char *nomFichierSansSuffixe);
+void supprimeSuffixe(char *nomFichierSansSuffixe);
+
+void ajouteSuffixe(char *nomFichier, char *suffixe);
 
 #endif
