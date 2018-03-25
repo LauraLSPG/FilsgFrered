@@ -1,6 +1,7 @@
 #include "functions.h"
 
 int main(int argc, char const *argv[]) {
+
 	Arbre lexico = NULL;
 	int stop = 0;
 	int arbreCree = 0;
@@ -8,36 +9,62 @@ int main(int argc, char const *argv[]) {
 	char nomFichierCourant[TAILLE_MAX];
 	char choix;
 	char mot[TAILLE_MAX];
+	FILE *dico;
 
 	if(argc == 3) {
+
 		strcpy(nomFichierTxt, argv[2]);
 		strcpy(nomFichierCourant, nomFichierTxt);
-		supprimeSuffixe(nomFichierCourant);
 
 		if (strcmp(argv[1], "-l") == 0) {
+
 			if (!arbreCree) {
-				ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
+                ajouteSuffixe(nomFichierCourant, ".DICO");
+                if (dico = fopen(nomFichierCourant, "r")) {
+                    creeArbreDepuisFichier(&lexico, dico);
+                    fclose(dico);
+                }
+				else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 				arbreCree = 1;
 			}
-			afficheLexiqueDepuisFichier(&lexico, nomFichierTxt);
-			
+
+			afficheLexique(&lexico);
+
 			printf("\n");
 		}
 
 		else if (strcmp(argv[1], "-s") == 0) {
+
+            if (!arbreCree) {
+                ajouteSuffixe(nomFichierCourant, ".DICO");
+                if (dico = fopen(nomFichierCourant, "r")) {
+                    creeArbreDepuisFichier(&lexico, dico);
+                    fclose(dico);
+                }
+				else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
+				arbreCree = 1;
+			}
+
 			ajouteSuffixe(nomFichierCourant, ".L");
 			sauvegardeLexiqueDansFichier(lexico, nomFichierCourant);
 			printf("Les mots du lexique ont bien été sauvegardés dans le ficher \"%s.\"\n\n", nomFichierTxt);
 		}
 
 		else if (strcmp(argv[1], "-r") == 0) {
+
 			printf("Quel mot souhaitez-vous chercher dans le lexique ?\n");
 			scanf(" %s", mot);
 
-			if(arbreCree == 0) {
-				ajouteMotsDepuisFichier(&lexico, nomFichierTxt);	
+			if (!arbreCree) {
+                ajouteSuffixe(nomFichierCourant, ".DICO");
+                if (dico = fopen(nomFichierCourant, "r")) {
+                    creeArbreDepuisFichier(&lexico, dico);
+                    fclose(dico);
+                }
+				else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 				arbreCree = 1;
 			}
+
 			if(recherche(lexico, mot) == 1)
 				printf("Le mot \"%s\" est présent dans le lexique.\n\n", mot);
 			else {
@@ -52,6 +79,7 @@ int main(int argc, char const *argv[]) {
 
 		else if (strcmp(argv[1], "-S") == 0) {
 			ajouteSuffixe(nomFichierCourant, ".DICO");
+			ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 			sauvegardeArbreDansFichier(lexico, nomFichierCourant);
 			printf("L'arbre a bien été sauvegardé dans le ficher \"%s\".\n\n", nomFichierTxt);
 		}
@@ -64,25 +92,46 @@ int main(int argc, char const *argv[]) {
 	if(argc == 2) {
 		strcpy(nomFichierTxt, argv[1]);
 		strcpy(nomFichierCourant, nomFichierTxt);
-		
+
+
 		while(stop == 0) {
-			supprimeSuffixe(nomFichierCourant);
-			
-			printf("Que souhaitez-vous faire ?\n- Appuyez sur 1 pour afficher les mots du lexique dans l\'ordre alphabétique.\n- Appuyez sur 2 pour sauvegarder les mots du lexique dans le ficher \"%s\".\n- Appuyez sur 3 pour rechercher un mot dans le lexique.\n- Appuyez sur 4 pour sauvegarder l\'arbre dans le ficher \"%s\".\n- Appuyez sur 5 pour quitter le programme.\n", argv[1], argv[1]);
+
+			printf("Que souhaitez-vous faire ?\n");
+            printf("- Appuyez sur 1 pour afficher les mots du lexique dans l\'ordre alphabétique.\n");
+            ajouteSuffixe(nomFichierCourant, ".L");
+            printf("- Appuyez sur 2 pour sauvegarder les mots du lexique dans le ficher \"%s\".\n", nomFichierCourant);
+            printf("- Appuyez sur 3 pour rechercher un mot dans le lexique.\n");
+            ajouteSuffixe(nomFichierCourant, ".DICO");
+            printf("- Appuyez sur 4 pour sauvegarder l\'arbre dans le ficher \"%s\".\n", nomFichierCourant);
+            printf("- Appuyez sur 5 pour quitter le programme.\n");
 			scanf(" %c", &choix);
 
 			switch(choix) {
 				case '1' :
 					if (!arbreCree) {
-						ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
-						arbreCree = 1;
-					}
-					afficheLexiqueDepuisFichier(&lexico, nomFichierTxt);
-					
+                        ajouteSuffixe(nomFichierCourant, ".DICO");
+                        if (dico = fopen(nomFichierCourant, "r")) {
+                                creeArbreDepuisFichier(&lexico, dico);
+                                fclose(dico);
+                        }
+                        else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
+                        arbreCree = 1;
+                    }
+					afficheLexique(&lexico);
+
 					printf("\n");
 					break;
 
 				case '2' :
+				    if (!arbreCree) {
+                        ajouteSuffixe(nomFichierCourant, ".DICO");
+                        if (dico = fopen(nomFichierCourant, "r")) {
+                                creeArbreDepuisFichier(&lexico, dico);
+                                fclose(dico);
+                        }
+                        else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
+                        arbreCree = 1;
+                    }
 					ajouteSuffixe(nomFichierCourant, ".L");
 					sauvegardeLexiqueDansFichier(lexico, nomFichierCourant);
 					printf("Les mots du lexique ont bien été sauvegardés dans le ficher \"%s.\"\n\n", nomFichierCourant);
@@ -92,10 +141,15 @@ int main(int argc, char const *argv[]) {
 					printf("Quel mot souhaitez-vous chercher dans le lexique ?\n");
 					scanf(" %s", mot);
 
-					if(arbreCree == 0) {
-						ajouteMotsDepuisFichier(&lexico, nomFichierTxt);	
-						arbreCree = 1;
-					}	
+					if (!arbreCree) {
+                        ajouteSuffixe(nomFichierCourant, ".DICO");
+                        if (dico = fopen(nomFichierCourant, "r")) {
+                                creeArbreDepuisFichier(&lexico, dico);
+                                fclose(dico);
+                        }
+                        else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
+                        arbreCree = 1;
+                    }
 					if(recherche(lexico, mot) == 1)
 						printf("Le mot \"%s\" est présent dans le lexique.\n\n", mot);
 					else {
@@ -110,6 +164,7 @@ int main(int argc, char const *argv[]) {
 
 				case '4' :
 					ajouteSuffixe(nomFichierCourant, ".DICO");
+                    ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 					sauvegardeArbreDansFichier(lexico, nomFichierCourant);
 					printf("L'arbre a bien été sauvegardé dans le ficher \"%s\".\n\n", nomFichierCourant);
 					break;
@@ -146,11 +201,11 @@ int main(int argc, char const *argv[]) {
 */
 
 /*
-	- Lorsque l'on ajoute un mot composé des memes lettres qu'un mot 
+	- Lorsque l'on ajoute un mot composé des memes lettres qu'un mot
 	déjà présent mais plus court (exemples : julia ou bla), le mot
 	ne s'ajoute pas à l'arbre (tandis que les mots julie ou blat
 	s'ajoutent correctement).
-	
+
 	- Lorsque l'on ajoute un mot, il s'ajoute à l'arbre mais pas au
 	fichier lexique ".L". Soit il faut ajouter cette fonction,
 	soit on supprimer la possibilité d'ajouter un mot (dans la recherche).

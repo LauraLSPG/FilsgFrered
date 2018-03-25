@@ -18,7 +18,7 @@ void ecrireDebut(FILE* stream) {
 }
 
 void ecrireFin(FILE* stream) {
-    
+
     fprintf(stream, "\n}\n");
 }
 
@@ -34,7 +34,7 @@ void ecrireArbre(FILE* stream, Arbre a){
             ecrireArbre(stream, a->frered);
         }
         if (a->filsg){
-            fprintf(stream, "n%p:s -> n%p [color=pink];\n", a, a->filsg);
+            fprintf(stream, "n%p:gauche:c -> n%p [color=pink];\n", a, a->filsg);
             ecrireArbre(stream, a->filsg);
         }
     }

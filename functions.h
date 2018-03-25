@@ -28,9 +28,7 @@ void ajouteMotsDepuisFichier (Arbre *a, char *nomFichier);
 
 void ajouteMot(Arbre *a, char *mot);
 
-void creeArbreDepuisFichier (Arbre *a, char *nomFichier);
-
-void creeArbre (Arbre *a, FILE *in);
+void creeArbreDepuisFichier (Arbre *a, FILE *in);
 
 /* Fonction de Recherche d'un mot dans un lexique */
 
@@ -38,9 +36,9 @@ int recherche(Arbre a, char *mot);
 
 /* Fonctions d'affichage du Lexique depuis un fichier */
 
-void afficheLexiqueDepuisFichier(Arbre *a, char *nomFichier);
+void afficheLexique(Arbre *a);
 
-void afficheLexique(Arbre a, char *buffer, int idx);
+void afficheLexiqueRecursif(Arbre a, char *buffer, int idx);
 
 /* Fonctions de sauvegarde du Lexique dans un fichier */
 
