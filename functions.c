@@ -1,6 +1,10 @@
 #include "functions.h"
 #include "dot.h"
 
+/*
+	Fonction d'allocation dynamiquement de la mémoire pour un caractère, c'est-à-dire un noeud
+	Retourne l'arbre
+*/
 Arbre alloueNoeud(unsigned char lettre) {
 
 	Arbre a =(Arbre)malloc(sizeof(Noeud));
@@ -14,6 +18,9 @@ Arbre alloueNoeud(unsigned char lettre) {
 	return a;
 }
 
+/*
+	Bla
+*/
 void ajouteBranche(Arbre *a, char *mot) {
 
 	if((*a = alloueNoeud(*mot)) != NULL) {
@@ -23,6 +30,9 @@ void ajouteBranche(Arbre *a, char *mot) {
 	}
 }
 
+/*
+	Bla
+*/
 void ajouteMot(Arbre *a, char *mot) {
 
 	Arbre tmp = NULL;
@@ -43,6 +53,9 @@ void ajouteMot(Arbre *a, char *mot) {
 	}
 }
 
+/*
+	Bla
+*/
 void ajouteMotsDepuisFichier(Arbre *a, char *nomFichier) {
 
   	int i;
@@ -68,7 +81,9 @@ void ajouteMotsDepuisFichier(Arbre *a, char *nomFichier) {
     fclose(in);
 }
 
-
+/*
+	Bla
+*/
 void creeArbreDepuisFichier(Arbre *a, FILE *in) {
 
 	char caractereActuel;
@@ -103,7 +118,8 @@ void creeArbreDepuisFichier(Arbre *a, FILE *in) {
 }
 
 /*
-	Fonction de recherche qui retourne :
+	Recherche le mot passé en paramètre dans l'arbre également passé en paramètre
+	Retourne :
 		0	si le mot est absent de l'arbre ou si si l'arbre est vide,
 		1	si le mot est présent dans l'arbre
 */
@@ -127,6 +143,9 @@ void afficheLexique(Arbre a) {
 
 }
 
+/*
+	Affiche chaque lettre en parcourant l'arbre fils gauche jusqu'à la fin du mot ('\0') puis passe au frère droit
+*/
 void afficheLexiqueRecursif(Arbre a, char *buffer, int idx) {
 
     if(a != NULL) {
@@ -141,6 +160,9 @@ void afficheLexiqueRecursif(Arbre a, char *buffer, int idx) {
     }
 }
 
+/*
+	Ouvre le fichier passé en paramètre, appelle la fonction de sauvegarde récursive et ferme le fichier
+*/
 void sauvegardeLexiqueDansFichier(Arbre a, char *nomFichier) {
 
     FILE *out = fopen(nomFichier, "w+");
@@ -150,6 +172,10 @@ void sauvegardeLexiqueDansFichier(Arbre a, char *nomFichier) {
 
 }
 
+/*
+	Bla
+	Ecrit chaque lettre dans le fichier en parcourant l'arbre fils gauche jusqu'à la fin du mot ('\0') puis passe au frère droit
+*/
 void sauvegardeLexique(Arbre a, FILE *out, char *buffer, int idx) {
 
     if(out != NULL && a != NULL) {
@@ -170,6 +196,9 @@ void sauvegardeLexique(Arbre a, FILE *out, char *buffer, int idx) {
     }
 }
 
+/*
+	Ouvre le fichier passé en paramètre, appelle la fonction de sauvegarde récursive et ferme le fichier
+*/
 void sauvegardeArbreDansFichier(Arbre a, char *nomFichier) {
 
     FILE *out = fopen(nomFichier, "w+");
@@ -177,6 +206,12 @@ void sauvegardeArbreDansFichier(Arbre a, char *nomFichier) {
     fclose(out);
 }
 
+/*
+	Bla
+	Ecrit chaque lettre dans le fichier en parcourant l'arbre fils gauche jusqu'à la fin du mot ('\0') puis passe au frère droit
+		'\n' indique un sous arbre vide
+		' ' indique la fin d'un mot
+*/
 void sauvegardeArbre(Arbre a, FILE *out) {
 
     if(a != NULL) {
@@ -193,6 +228,9 @@ void sauvegardeArbre(Arbre a, FILE *out) {
     else fprintf(out, "\n");
 }
 
+/*
+	Supprime l'extension du nom de fichier passé en paramètre en parcourant la chaîne de caractère jusqu'à trouver un point et en le remplaçant par la caractère de fin de mot ('\0')
+*/
 void supprimeSuffixe(char *nomFichier) {
 
 	int idx = 0;
@@ -203,6 +241,9 @@ void supprimeSuffixe(char *nomFichier) {
 	nomFichier[idx] = '\0';
 }
 
+/*
+	Concatène le nom de fichier passé en paramètre sans extension avec la nouvelle extension passée en paramètre
+*/
 void ajouteSuffixe(char *nomFichier, char *suffixe) {
 
 	supprimeSuffixe(nomFichier);
