@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-#define TAILLE_MAX 30
+#define TAILLE_MAX 50
 
 /*
 	COMPILATION
@@ -36,7 +36,7 @@ int recherche(Arbre a, char *mot);
 
 /* Fonctions d'affichage du Lexique depuis un fichier */
 
-void afficheLexique(Arbre *a);
+void afficheLexique(Arbre a);
 
 void afficheLexiqueRecursif(Arbre a, char *buffer, int idx);
 

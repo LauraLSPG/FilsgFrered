@@ -1,4 +1,5 @@
 #include "functions.h"
+#include "dot.h"
 
 int main(int argc, char const *argv[]) {
 
@@ -20,16 +21,16 @@ int main(int argc, char const *argv[]) {
 
 			if (!arbreCree) {
                 ajouteSuffixe(nomFichierCourant, ".DICO");
-                if (dico = fopen(nomFichierCourant, "r")) {
-                    creeArbreDepuisFichier(&lexico, dico);
-                    fclose(dico);
-                }
+								if (dico = fopen(nomFichierCourant, "r")) {
+									printf("Chargé depuis dico\n");
+									creeArbreDepuisFichier(&lexico, dico);
+									fclose(dico);
+								}
 				else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 				arbreCree = 1;
 			}
 
-			afficheLexique(&lexico);
-
+			afficheLexique(lexico);
 			printf("\n");
 		}
 
@@ -37,10 +38,11 @@ int main(int argc, char const *argv[]) {
 
             if (!arbreCree) {
                 ajouteSuffixe(nomFichierCourant, ".DICO");
-                if (dico = fopen(nomFichierCourant, "r")) {
-                    creeArbreDepuisFichier(&lexico, dico);
-                    fclose(dico);
-                }
+								if (dico = fopen(nomFichierCourant, "r")) {
+									printf("Chargé depuis dico\n");
+									creeArbreDepuisFichier(&lexico, dico);
+									fclose(dico);
+								}
 				else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 				arbreCree = 1;
 			}
@@ -57,16 +59,16 @@ int main(int argc, char const *argv[]) {
 
 			if (!arbreCree) {
                 ajouteSuffixe(nomFichierCourant, ".DICO");
-                if (dico = fopen(nomFichierCourant, "r")) {
-                    creeArbreDepuisFichier(&lexico, dico);
-                    fclose(dico);
-                }
+								if (dico = fopen(nomFichierCourant, "r")) {
+									printf("Chargé depuis dico\n");
+									creeArbreDepuisFichier(&lexico, dico);
+									fclose(dico);
+								}
 				else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 				arbreCree = 1;
 			}
 
-			if(recherche(lexico, mot) == 1)
-				printf("Le mot \"%s\" est présent dans le lexique.\n\n", mot);
+			if(recherche(lexico, mot) == 1) printf("Le mot \"%s\" est présent dans le lexique.\n\n", mot);
 			else {
 				printf("Le mot \"%s\" est absent du lexique.\nSouhaitez-vous l'ajouter ?\nSi oui, appuyez sur 1, sinon, sur 0.\n", mot);
 				scanf(" %c", &choix);
@@ -79,14 +81,14 @@ int main(int argc, char const *argv[]) {
 
 		else if (strcmp(argv[1], "-S") == 0) {
 			ajouteSuffixe(nomFichierCourant, ".DICO");
+			lexico = NULL;
 			ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
+			arbreCree = 1;
 			sauvegardeArbreDansFichier(lexico, nomFichierCourant);
 			printf("L'arbre a bien été sauvegardé dans le ficher \"%s\".\n\n", nomFichierTxt);
 		}
 
-		else {
-			printf("Oups, les caractères saisis ne correspondent à aucune option disponible.\n\n");
-		}
+		else printf("Oups, les caractères saisis ne correspondent à aucune option disponible.\n\n");
 	}
 
 	if(argc == 2) {
@@ -104,31 +106,33 @@ int main(int argc, char const *argv[]) {
             ajouteSuffixe(nomFichierCourant, ".DICO");
             printf("- Appuyez sur 4 pour sauvegarder l\'arbre dans le ficher \"%s\".\n", nomFichierCourant);
             printf("- Appuyez sur 5 pour quitter le programme.\n");
+
 			scanf(" %c", &choix);
 
 			switch(choix) {
 				case '1' :
 					if (!arbreCree) {
-                        ajouteSuffixe(nomFichierCourant, ".DICO");
-                        if (dico = fopen(nomFichierCourant, "r")) {
-                                creeArbreDepuisFichier(&lexico, dico);
-                                fclose(dico);
-                        }
-                        else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
-                        arbreCree = 1;
+                ajouteSuffixe(nomFichierCourant, ".DICO");
+                if (dico = fopen(nomFichierCourant, "r")) {
+										printf("Chargé depuis dico\n");
+                    creeArbreDepuisFichier(&lexico, dico);
+                    fclose(dico);
                     }
-					afficheLexique(&lexico);
-
+                else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
+                arbreCree = 1;
+          }
+					afficheLexique(lexico);
 					printf("\n");
 					break;
 
 				case '2' :
 				    if (!arbreCree) {
                         ajouteSuffixe(nomFichierCourant, ".DICO");
-                        if (dico = fopen(nomFichierCourant, "r")) {
-                                creeArbreDepuisFichier(&lexico, dico);
-                                fclose(dico);
-                        }
+												if (dico = fopen(nomFichierCourant, "r")) {
+													printf("Chargé depuis dico\n");
+													creeArbreDepuisFichier(&lexico, dico);
+													fclose(dico);
+												}
                         else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
                         arbreCree = 1;
                     }
@@ -143,10 +147,11 @@ int main(int argc, char const *argv[]) {
 
 					if (!arbreCree) {
                         ajouteSuffixe(nomFichierCourant, ".DICO");
-                        if (dico = fopen(nomFichierCourant, "r")) {
-                                creeArbreDepuisFichier(&lexico, dico);
-                                fclose(dico);
-                        }
+												if (dico = fopen(nomFichierCourant, "r")) {
+													printf("Chargé depuis dico\n");
+													creeArbreDepuisFichier(&lexico, dico);
+													fclose(dico);
+												}
                         else ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
                         arbreCree = 1;
                     }
@@ -164,8 +169,12 @@ int main(int argc, char const *argv[]) {
 
 				case '4' :
 					ajouteSuffixe(nomFichierCourant, ".DICO");
-                    ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
+					lexico = NULL;
+          ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 					sauvegardeArbreDansFichier(lexico, nomFichierCourant);
+					makedot(lexico, "Lexique.dot");
+					afficheLexique(lexico);
+					arbreCree = 1;
 					printf("L'arbre a bien été sauvegardé dans le ficher \"%s\".\n\n", nomFichierCourant);
 					break;
 
@@ -174,7 +183,6 @@ int main(int argc, char const *argv[]) {
 					break;
 
 				default :
-
 					break;
 			}
 		}

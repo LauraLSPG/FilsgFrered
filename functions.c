@@ -34,7 +34,7 @@ void ajouteMot(Arbre *a, char *mot) {
 			if((*mot == (*a)->lettre) && (*mot != '\0')) ajouteMot(&((*a)->filsg), mot+1);
 			else {
 				if((*a)->lettre != '\0') {
-                    ajouteBranche(&tmp, mot);
+          ajouteBranche(&tmp, mot);
 					tmp->frered = (*a);
 					*a = tmp;
 				}
@@ -45,8 +45,8 @@ void ajouteMot(Arbre *a, char *mot) {
 
 void ajouteMotsDepuisFichier(Arbre *a, char *nomFichier) {
 
-    int i;
-	char caractereActuel;
+  	int i;
+		char caractereActuel;
     char bufferAjout[TAILLE_MAX];
     FILE *in = fopen(nomFichier, "r");
 
@@ -79,12 +79,16 @@ void creeArbreDepuisFichier(Arbre *a, FILE *in) {
 
             switch(caractereActuel) {
 
-            case 32 :
+							printf("%c", caractereActuel);
+
+            case ' ' :
+						printf("%");
                 *a = alloueNoeud('\0');
                 creeArbreDepuisFichier(&((*a)->frered), in);
                 break;
 
-            case 10 :
+            case '\n' :
+								printf("$");
                 return;
                 break;
 
@@ -114,11 +118,11 @@ int recherche(Arbre a, char *mot) {
 	return recherche(a->frered, mot);
 }
 
-void afficheLexique(Arbre *a) {
+void afficheLexique(Arbre a) {
 
     char buffer[TAILLE_MAX];
-    afficheLexiqueRecursif(*a, buffer, 0);
-    makedot(*a, "Lexique.dot");
+    afficheLexiqueRecursif(a, buffer, 0);
+    makedot(a, "Lexique.dot");
     system("dot -Tpdf Lexique.dot -o Lexique.pdf");
 
 }
@@ -139,7 +143,7 @@ void afficheLexiqueRecursif(Arbre a, char *buffer, int idx) {
 
 void sauvegardeLexiqueDansFichier(Arbre a, char *nomFichier) {
 
-    FILE *out = fopen(nomFichier, "w");
+    FILE *out = fopen(nomFichier, "w+");
     char buffer[TAILLE_MAX];
     sauvegardeLexique(a, out, buffer, 0);
     fclose(out);
@@ -151,7 +155,6 @@ void sauvegardeLexique(Arbre a, FILE *out, char *buffer, int idx) {
     if(out != NULL && a != NULL) {
 
         buffer[idx] = a->lettre;
-        printf("%c = %d\n", a->lettre, a->lettre);
 
         if(a->lettre == '\0') {
             buffer[idx] = ' ';
@@ -169,7 +172,7 @@ void sauvegardeLexique(Arbre a, FILE *out, char *buffer, int idx) {
 
 void sauvegardeArbreDansFichier(Arbre a, char *nomFichier) {
 
-    FILE *out = fopen(nomFichier, "w");
+    FILE *out = fopen(nomFichier, "w+");
     sauvegardeArbre(a, out);
     fclose(out);
 }
@@ -186,7 +189,7 @@ void sauvegardeArbre(Arbre a, FILE *out) {
             fprintf(out, " ");
             sauvegardeArbre(a->frered, out);
         }
-    }
+			}
     else fprintf(out, "\n");
 }
 
