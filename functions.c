@@ -5,7 +5,7 @@
 	Fonction d'allocation dynamiquement de la mémoire pour un caractère, c'est-à-dire un noeud
 	Retourne l'arbre
 */
-Arbre alloueNoeud(unsigned char lettre) {
+Arbre alloueNoeud(char lettre) {
 
 	Arbre a =(Arbre)malloc(sizeof(Noeud));
 
@@ -84,38 +84,29 @@ void ajouteMotsDepuisFichier(Arbre *a, char *nomFichier) {
 /*
 	Bla
 */
-void creeArbreDepuisFichier(Arbre *a, FILE *in) {
+void creeArbreDepuisFichier(Arbre *a, FILE *in, char *buffer, int index) {
 
 	char caractereActuel;
 
-    if(in != NULL) {
+    if(in != NULL && (caractereActuel = fgetc(in)) != EOF) {
 
-        while((caractereActuel = fgetc(in)) != EOF) {
+					if (caractereActuel != '\n') {
 
-            switch(caractereActuel) {
-
-							printf("%c", caractereActuel);
-
-            case ' ' :
-						printf("%");
-                *a = alloueNoeud('\0');
-                creeArbreDepuisFichier(&((*a)->frered), in);
-                break;
-
-            case '\n' :
-								printf("$");
-                return;
-                break;
-
-            default :
-                *a = alloueNoeud(caractereActuel);
-                creeArbreDepuisFichier(&((*a)->filsg), in);
-                creeArbreDepuisFichier(&((*a)->frered), in);
-                break;
-            }
-        }
+						if (caractereActuel == ' ') {
+							buffer[index] = '\0';
+							ajouteMot(a, buffer);
+							creeArbreDepuisFichier(a, in, buffer, index);
+						}
+						else {
+							buffer[index] = caractereActuel;
+							creeArbreDepuisFichier(a, in, buffer, index+1);
+						}
+					}
+					if (index == 0) creeArbreDepuisFichier(a, in, buffer, index);
+					return;
     }
 }
+
 
 /*
 	Recherche le mot passé en paramètre dans l'arbre également passé en paramètre
@@ -165,7 +156,7 @@ void afficheLexiqueRecursif(Arbre a, char *buffer, int idx) {
 */
 void sauvegardeLexiqueDansFichier(Arbre a, char *nomFichier) {
 
-    FILE *out = fopen(nomFichier, "w+");
+    FILE *out = fopen(nomFichier, "w");
     char buffer[TAILLE_MAX];
     sauvegardeLexique(a, out, buffer, 0);
     fclose(out);
@@ -201,7 +192,7 @@ void sauvegardeLexique(Arbre a, FILE *out, char *buffer, int idx) {
 */
 void sauvegardeArbreDansFichier(Arbre a, char *nomFichier) {
 
-    FILE *out = fopen(nomFichier, "w+");
+    FILE *out = fopen(nomFichier, "w");
     sauvegardeArbre(a, out);
     fclose(out);
 }
@@ -224,7 +215,7 @@ void sauvegardeArbre(Arbre a, FILE *out) {
             fprintf(out, " ");
             sauvegardeArbre(a->frered, out);
         }
-			}
+		}
     else fprintf(out, "\n");
 }
 

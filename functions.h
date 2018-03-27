@@ -2,11 +2,12 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 #define TAILLE_MAX 50
 
 /*
 	COMPILATION
-	gcc -ansi -Wall Lexique.c -o Lexique
+	gcc -ansi -Wall Lexique.c functions.c dot.c -o Lexique
 	./Lexique
 */
 
@@ -14,11 +15,11 @@
 #define FG_FrD
 
 typedef struct noeud {
-    unsigned char lettre;
+    char lettre;
     struct noeud *filsg, *frered;
 } Noeud, *Arbre;
 
-Arbre alloueNoeud(unsigned char lettre);
+Arbre alloueNoeud(char lettre);
 
 void ajouteBranche(Arbre *a, char *mot);
 
@@ -28,7 +29,7 @@ void ajouteMotsDepuisFichier (Arbre *a, char *nomFichier);
 
 void ajouteMot(Arbre *a, char *mot);
 
-void creeArbreDepuisFichier (Arbre *a, FILE *in);
+void creeArbreDepuisFichier(Arbre *a, FILE *in, char *buffer, int index);
 
 /* Fonction de Recherche d'un mot dans un lexique */
 
