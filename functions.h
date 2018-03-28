@@ -15,11 +15,11 @@
 #define FG_FrD
 
 typedef struct noeud {
-    char lettre;
+    unsigned char lettre;
     struct noeud *filsg, *frered;
 } Noeud, *Arbre;
 
-Arbre alloueNoeud(char lettre);
+Arbre alloueNoeud(unsigned char lettre);
 
 void ajouteBranche(Arbre *a, char *mot);
 
