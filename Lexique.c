@@ -47,7 +47,7 @@ int main(int argc, char const *argv[]) {
 
 			ajouteSuffixe(nomFichierCourant, ".L");
 			sauvegardeLexiqueDansFichier(lexico, nomFichierCourant);
-			printf("Les mots du lexique ont bien été sauvegardés dans le ficher \"%s.\"\n\n", nomFichierTxt);
+			printf("Les mots du lexique ont bien été sauvegardés dans le fichier \"%s.\"\n\n", nomFichierTxt);
 		}
 
 		else if (strcmp(argv[1], "-r") == 0) {
@@ -82,7 +82,7 @@ int main(int argc, char const *argv[]) {
 			lexico = NULL;
 			ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 			sauvegardeArbreDansFichier(lexico, nomFichierCourant);
-			printf("L'arbre a bien été sauvegardé dans le ficher \"%s\".\n\n", nomFichierTxt);
+			printf("L'arbre a bien été sauvegardé dans le fichier \"%s\".\n\n", nomFichierTxt);
 		}
 
 		else printf("Oups, les caractères saisis ne correspondent à aucune option disponible.\n\n");
@@ -98,10 +98,10 @@ int main(int argc, char const *argv[]) {
 			printf("Que souhaitez-vous faire ?\n");
             printf("- Appuyez sur 1 pour afficher les mots du lexique dans l\'ordre alphabétique.\n");
             ajouteSuffixe(nomFichierCourant, ".");
-            printf("- Appuyez sur 2 pour sauvegarder les mots du lexique dans le ficher \"%s\".\n", nomFichierCourant);
+            printf("- Appuyez sur 2 pour sauvegarder les mots du lexique dans le fichier \"%s\".\n", nomFichierCourant);
             printf("- Appuyez sur 3 pour rechercher un mot dans le lexique.\n");
             ajouteSuffixe(nomFichierCourant, ".DICO");
-            printf("- Appuyez sur 4 pour sauvegarder l\'arbre dans le ficher \"%s\".\n", nomFichierCourant);
+            printf("- Appuyez sur 4 pour sauvegarder l\'arbre dans le fichier \"%s\".\n", nomFichierCourant);
             printf("- Appuyez sur 5 pour quitter le programme.\n");
 
 			scanf(" %c", &choix);
@@ -134,7 +134,7 @@ int main(int argc, char const *argv[]) {
                     }
 					ajouteSuffixe(nomFichierCourant, ".L");
 					sauvegardeLexiqueDansFichier(lexico, nomFichierCourant);
-					printf("Les mots du lexique ont bien été sauvegardés dans le ficher \"%s.\"\n\n", nomFichierCourant);
+					printf("Les mots du lexique ont bien été sauvegardés dans le fichier \"%s.\"\n\n", nomFichierCourant);
 					break;
 
 				case '3' :
@@ -183,35 +183,3 @@ int main(int argc, char const *argv[]) {
 
 	return 0;
 }
-
-/*
-	Bright star would I were stedfast as thou art
-	Not in lone splendour hung aloft the night
-	And watching with eternal lids apart
-	Like nature's patient sleepless Eremite
-	The moving waters at their priestlike task
-	Of pure ablution round earth's human shores
-	Or gazing on the new soft-fallen mask
-	Of snow upon the mountains and the moors
-	No—yet still stedfast still unchangeable
-	Pillow'd upon my fair love's ripening breast
-	To feel for ever its soft fall and swell
-	Awake for ever in a sweet unrest
-	Still still to hear her tender-taken breath
-	And so live ever—or else swoon to death
-*/
-
-/*
-	- Lorsque l'on ajoute un mot composé des memes lettres qu'un mot
-	déjà présent mais plus court (exemples : julia ou bla), le mot
-	ne s'ajoute pas à l'arbre (tandis que les mots julie ou blat
-	s'ajoutent correctement).
-
-	- Lorsque l'on ajoute un mot, il s'ajoute à l'arbre mais pas au
-	fichier lexique ".". Soit il faut ajouter cette fonction,
-	soit on supprimer la possibilité d'ajouter un mot (dans la recherche).
-	En fait si, miracle ! <3
-
-	- La fonction qui permet de sauvegarder l'arbre dans un fichier ".DICO"
-	ne fonctionne pas, le fichier en question est vide.
-*/
