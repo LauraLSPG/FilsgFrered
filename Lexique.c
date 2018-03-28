@@ -86,7 +86,7 @@ int main(int argc, char const *argv[]) {
 			ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 			arbreCree = 1;
 			sauvegardeArbreDansFichier(lexico, nomFichierCourant);
-			printf("L'arbre a bien été sauvegardé dans le ficher \"%s\".\n\n", nomFichierTxt);
+			printf("L'arbre a bien été sauvegardé dans le fichier \"%s\".\n\n", nomFichierTxt);
 		}
 
 		else printf("Oups, les caractères saisis ne correspondent à aucune option disponible.\n\n");
@@ -102,7 +102,7 @@ int main(int argc, char const *argv[]) {
 			printf("Que souhaitez-vous faire ?\n");
             printf("- Appuyez sur 1 pour afficher les mots du lexique dans l\'ordre alphabétique.\n");
             ajouteSuffixe(nomFichierCourant, ".");
-            printf("- Appuyez sur 2 pour sauvegarder les mots du lexique dans le ficher \"%s\".\n", nomFichierCourant);
+            printf("- Appuyez sur 2 pour sauvegarder les mots du lexique dans le fichier \"%s\".\n", nomFichierCourant);
             printf("- Appuyez sur 3 pour rechercher un mot dans le lexique.\n");
             ajouteSuffixe(nomFichierCourant, ".DICO");
             printf("- Appuyez sur 4 pour sauvegarder l\'arbre dans le ficher \"%s\".\n", nomFichierCourant);
