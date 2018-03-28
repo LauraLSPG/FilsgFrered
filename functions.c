@@ -66,6 +66,7 @@ void ajouteMotsDepuisFichier(Arbre *a, char *nomFichier) {
     if(in != NULL) {
 
         while((caractereActuel = fgetc(in)) != EOF) {
+					if (caractereActuel > 0) {
             i = 0;
             while(caractereActuel != 32 && caractereActuel != EOF) {
             	if(caractereActuel != 10 && caractereActuel != 13) {
@@ -77,6 +78,7 @@ void ajouteMotsDepuisFichier(Arbre *a, char *nomFichier) {
             bufferAjout[i] = '\0';
             ajouteMot(a, bufferAjout);
         }
+			}
     }
     fclose(in);
 }
@@ -84,27 +86,27 @@ void ajouteMotsDepuisFichier(Arbre *a, char *nomFichier) {
 /*
 	Bla
 */
-void creeArbreDepuisFichier(Arbre *a, FILE *in, char *buffer, int index) {
+void creeArbreDepuisFichier(Arbre *a, FILE *in) {
 
+	char buffer[TAILLE_MAX];
 	char caractereActuel;
+	int i = 0;
 
-    if(in != NULL && (caractereActuel = fgetc(in)) != EOF) {
-
-					if (caractereActuel != '\n') {
-
-						if (caractereActuel == ' ') {
-							buffer[index] = '\0';
-							ajouteMot(a, buffer);
-							creeArbreDepuisFichier(a, in, buffer, index);
-						}
-						else {
-							buffer[index] = caractereActuel;
-							creeArbreDepuisFichier(a, in, buffer, index+1);
-						}
+    if(in != NULL) {
+			while ((caractereActuel = fgetc(in)) != EOF) {
+					if (caractereActuel == ' ') {
+								buffer[i] = '\0';
+								ajouteMot(a, buffer);
 					}
-					if (index == 0) creeArbreDepuisFichier(a, in, buffer, index);
-					return;
+					else if (caractereActuel == '\n') {
+						if (i>0) i--;
+					}
+					else {
+						buffer[i] = caractereActuel;
+						i++;
+					}
     }
+	}
 }
 
 /*
@@ -124,6 +126,7 @@ int recherche(Arbre a, char *mot) {
 	return recherche(a->frered, mot);
 }
 
+
 void afficheLexique(Arbre a) {
 
     char buffer[TAILLE_MAX];
@@ -141,7 +144,7 @@ void afficheLexiqueRecursif(Arbre a, char *buffer, int idx) {
     if(a != NULL) {
         buffer[idx] = a->lettre;
         if(a->lettre == '\0') {
-                printf("%s\n", buffer);
+            printf("%s\n", buffer);
         }
         else {
             afficheLexiqueRecursif(a->filsg, buffer, idx+1);

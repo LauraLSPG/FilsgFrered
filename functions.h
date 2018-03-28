@@ -29,7 +29,7 @@ void ajouteMotsDepuisFichier (Arbre *a, char *nomFichier);
 
 void ajouteMot(Arbre *a, char *mot);
 
-void creeArbreDepuisFichier(Arbre *a, FILE *in, char *buffer, int index);
+void creeArbreDepuisFichier(Arbre *a, FILE *in);
 
 /* Fonction de Recherche d'un mot dans un lexique */
 
