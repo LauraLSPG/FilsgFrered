@@ -50,7 +50,7 @@ int main(int argc, char const *argv[]) {
 
 			ajouteSuffixe(nomFichierCourant, ".");
 			sauvegardeLexiqueDansFichier(lexico, nomFichierCourant);
-			printf("Les mots du lexique ont bien été sauvegardés dans le ficher \"%s.\"\n\n", nomFichierTxt);
+			printf("Les mots du lexique ont bien été sauvegardés dans le fichier \"%s.\"\n\n", nomFichierTxt);
 		}
 
 		else if (strcmp(argv[1], "-r") == 0) {
@@ -105,7 +105,7 @@ int main(int argc, char const *argv[]) {
             printf("- Appuyez sur 2 pour sauvegarder les mots du lexique dans le fichier \"%s\".\n", nomFichierCourant);
             printf("- Appuyez sur 3 pour rechercher un mot dans le lexique.\n");
             ajouteSuffixe(nomFichierCourant, ".DICO");
-            printf("- Appuyez sur 4 pour sauvegarder l\'arbre dans le ficher \"%s\".\n", nomFichierCourant);
+            printf("- Appuyez sur 4 pour sauvegarder l\'arbre dans le fichier \"%s\".\n", nomFichierCourant);
             printf("- Appuyez sur 5 pour quitter le programme.\n");
 
 			scanf(" %c", &choix);
@@ -139,7 +139,7 @@ int main(int argc, char const *argv[]) {
                     }
 					ajouteSuffixe(nomFichierCourant, ".");
 					sauvegardeLexiqueDansFichier(lexico, nomFichierCourant);
-					printf("Les mots du lexique ont bien été sauvegardés dans le ficher \"%s.\"\n\n", nomFichierCourant);
+					printf("Les mots du lexique ont bien été sauvegardés dans le fichier \"%s.\"\n\n", nomFichierCourant);
 					break;
 
 				case '3' :
@@ -174,7 +174,7 @@ int main(int argc, char const *argv[]) {
           ajouteMotsDepuisFichier(&lexico, nomFichierTxt);
 					sauvegardeArbreDansFichier(lexico, nomFichierCourant);
 					arbreCree = 1;
-					printf("L'arbre a bien été sauvegardé dans le ficher \"%s\".\n\n", nomFichierCourant);
+					printf("L'arbre a bien été sauvegardé dans le fichier \"%s\".\n\n", nomFichierCourant);
 					break;
 
 				case '5' :
